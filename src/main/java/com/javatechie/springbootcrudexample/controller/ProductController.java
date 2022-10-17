@@ -3,9 +3,7 @@ package com.javatechie.springbootcrudexample.controller;
 import com.javatechie.springbootcrudexample.entity.Product;
 import com.javatechie.springbootcrudexample.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,29 @@ public class ProductController {
         return service.saveProducts(products);
     }
 
+    @GetMapping("/products")
+    public List<Product> findAllProducts(){
+        return service.getProducts();
+    }
 
+    @GetMapping("/productById/{id}")
+    public Product findProductById(@PathVariable Long id){
+        return service.getProductById(id);
+    }
 
+    @GetMapping("/productByName/{name}")
+    public Product findProductByName(@PathVariable String name){
+        return service.getProductByName(name);
+    }
+
+    @PutMapping("/update")
+    public Product updateProduct(@RequestBody Product product){
+        return service.updateProduct(product);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id){
+        return service.deleteProduct(id);
+
+    }
 }
